@@ -18,7 +18,7 @@ Public Class InterfaceWindow
          PlayersSetup(NewComputerColor:=DiskColorsE.DCYellow, NewFirstColor:=DiskColorsE.DCRed)
          InitializeGame()
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
    End Sub
 
@@ -27,7 +27,7 @@ Public Class InterfaceWindow
       Try
          PlayGame(e.KeyCode)
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
    End Sub
 
@@ -36,7 +36,7 @@ Public Class InterfaceWindow
       Try
          HumanMakeMove(Column:=(e.X \ SLOT_SIZE))
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
    End Sub
 
@@ -46,7 +46,7 @@ Public Class InterfaceWindow
          DrawDisks(e.Graphics)
          DisplayStatus()
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
    End Sub
 End Class

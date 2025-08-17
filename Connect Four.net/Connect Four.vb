@@ -69,7 +69,7 @@ Public Module ConnectFourModule
 
          Return CurrentPlayer
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
 
       Return Nothing
@@ -110,7 +110,7 @@ Public Module ConnectFourModule
             Loop
          End If
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
    End Sub
 
@@ -124,7 +124,7 @@ Public Module ConnectFourModule
                End If
          End Select
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
    End Sub
 
@@ -151,7 +151,7 @@ Public Module ConnectFourModule
 
          Return DiskCount
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
 
       Return Nothing
@@ -174,7 +174,7 @@ Public Module ConnectFourModule
             Row += 1
          End If
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
    End Sub
 
@@ -205,11 +205,20 @@ Public Module ConnectFourModule
 
          Return Disk
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
 
       Return Nothing
    End Function
+
+   'This procedure displays any exceptions that occur.
+   Public Sub DisplayException(ExceptionO As Exception)
+      Try
+         MessageBox.Show(ExceptionO.Message, My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Error)
+      Catch
+         Application.Exit()
+      End Try
+   End Sub
 
    'This procedure displays the help.
    Private Sub DisplayHelp()
@@ -229,7 +238,7 @@ Public Module ConnectFourModule
 
          MessageBox.Show(HelpText.ToString(), My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Information)
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
    End Sub
 
@@ -238,7 +247,7 @@ Public Module ConnectFourModule
       Try
          InterfaceO().Text = $"{My.Application.Info.Title} - {StateText()} H = Help"
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
    End Sub
 
@@ -249,7 +258,7 @@ Public Module ConnectFourModule
          Canvas.FillEllipse(New SolidBrush({Color.Blue, Color.Cyan, Color.Red, Color.Yellow}(DiskColor)), CInt((Column + 0.1) * SLOT_SIZE), CInt((Row + 0.1) * SLOT_SIZE), CInt(SLOT_SIZE / 1.25), CInt(SLOT_SIZE / 1.25))
          Canvas.DrawEllipse(Pens.Black, CInt((Column + 0.1) * SLOT_SIZE), CInt((Row + 0.1) * SLOT_SIZE), CInt(SLOT_SIZE / 1.25), CInt(SLOT_SIZE / 1.25))
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
    End Sub
 
@@ -269,11 +278,11 @@ Public Module ConnectFourModule
                GreyOutDisks(Canvas)
          End Select
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
    End Sub
 
-   'This procdure determines which columns can be used by the computer player to make a move.
+   'This procedure determines which columns can be used by the computer player to make a move.
    Private Function FindMoves(DiskColor As DiskColorsE, TriggerLength As Integer, AllowHelpingOpponent As Boolean) As Boolean()
       Try
          Dim Column As New Integer
@@ -330,7 +339,7 @@ Public Module ConnectFourModule
 
          Return MovesFound
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
 
       Return Nothing
@@ -341,7 +350,7 @@ Public Module ConnectFourModule
       Try
          Return Not Array.TrueForAll(MovesFound, Function(Item As Boolean) Item = False)
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
 
       Return Nothing
@@ -356,7 +365,7 @@ Public Module ConnectFourModule
 
          Return True
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
 
       Return Nothing
@@ -389,7 +398,7 @@ Public Module ConnectFourModule
 
          Return GameState
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
 
       Return Nothing
@@ -406,16 +415,7 @@ Public Module ConnectFourModule
             Next Row
          Next Column
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
-      End Try
-   End Sub
-
-   'This procedure handles any errors that occur.
-   Public Sub HandleError(ExceptionO As Exception)
-      Try
-         MessageBox.Show(ExceptionO.Message, My.Application.Info.Title, MessageBoxButtons.OK, MessageBoxIcon.Error)
-      Catch
-         Application.Exit()
+         DisplayException(ExceptionO)
       End Try
    End Sub
 
@@ -434,7 +434,7 @@ Public Module ConnectFourModule
             End If
          End If
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
    End Sub
 
@@ -447,7 +447,7 @@ Public Module ConnectFourModule
          Disks(, , , ResetDisks:=True)
          InterfaceO.Invalidate()
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
    End Sub
 
@@ -471,7 +471,7 @@ Public Module ConnectFourModule
 
          Return CurrentInterface
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
 
       Return Nothing
@@ -502,7 +502,7 @@ Public Module ConnectFourModule
 
          Return False
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
 
       Return Nothing
@@ -536,7 +536,7 @@ Public Module ConnectFourModule
 
          Return CurrentPlayersSetup
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
 
       Return Nothing
@@ -586,7 +586,7 @@ Public Module ConnectFourModule
             End Select
          End If
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
    End Sub
 
@@ -599,7 +599,7 @@ Public Module ConnectFourModule
 
          Return CurrentSelectedColumn
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
 
       Return Nothing
@@ -610,7 +610,7 @@ Public Module ConnectFourModule
       Try
          Return {"Inactive. - Press any key.", "Red's turn.", "Red won.", "Game is tied.", "Yellow's turn.", "Yellow won."}(GetGameState())
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
 
       Return Nothing
@@ -637,7 +637,7 @@ Public Module ConnectFourModule
 
          Return DiskColorsE.DCNone
       Catch ExceptionO As Exception
-         HandleError(ExceptionO)
+         DisplayException(ExceptionO)
       End Try
 
       Return Nothing
